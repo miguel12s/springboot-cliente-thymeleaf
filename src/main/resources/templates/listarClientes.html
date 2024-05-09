@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="plantillas/base ::head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav th:replace="plantillas/base ::nav"></nav>
+<h2 class="text-center mt-5 font-monospace fw-bold fw-medium ">Listar clientes</h2>
+<div   class="w-50 ms-4 d-block alert " th:classappend="'alert-' + (${class != null} ? ${class} : info)"  th:if="${mensaje}" >
+    <p th:text="${mensaje}"></p>
+</div>
+<div class="container-fluid d-flex ">
+
+    <table class="table table-striped">
+    <thead>
+    <tr>
+
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Acciones</th>
+
+    </tr>
+    </thead>
+    <tbody >
+    <tr th:each="cliente: ${clientes}">
+
+        <td th:text="${cliente.getNombre()}"></td>
+        <td th:text="${cliente.getApellido()}"></td>
+        <td th:text="${cliente.getTelefono()}"></td>
+        <td th:text="${cliente.getCorreo()}"></td>
+        <td>
+            <a th:href="@{/actualizarCliente/{id}(id=${cliente.getIdCliente()})}" class="btn btn-primary">Actualizar</a>
+            <a th:href="@{/deleteCliente/{id}(id=${cliente.getIdCliente()})}" class="btn btn-danger">Eliminar</a>
+
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+</div>
+
+</body>
+</html>
